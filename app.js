@@ -1,6 +1,7 @@
 // 載入express及套件
 const express = require('express')
 const mongoose = require('mongoose') // 載入 mongoose
+const exphbs = require('express-handlebars')
 
 const app = express()
 const port = 3000
@@ -20,9 +21,13 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
+// 設定為handlebars引擎
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
+
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.send('Hello')
+  res.render('index')
 })
 
 // 監聽器

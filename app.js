@@ -1,7 +1,10 @@
 // 載入express及套件
 const express = require('express')
-const mongoose = require('mongoose') // 載入 mongoose
-const exphbs = require('express-handlebars')
+const mongoose = require('mongoose') 
+const exphbs = require('express-handlebars')  
+const Restaurant = require('./models/restaurant')
+const { response } = require('express')
+const restaurant = require('./models/restaurant')
 
 const app = express()
 const port = 3000
@@ -27,7 +30,11 @@ app.set('view engine', 'handlebars')
 
 // 設定首頁路由
 app.get('/', (req, res) => {
-  res.render('index')
+  // 拿餐廳的資料
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
 })
 
 // 監聽器

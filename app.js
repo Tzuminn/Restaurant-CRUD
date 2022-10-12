@@ -1,7 +1,7 @@
 // 載入express及套件
 const express = require('express')
-const mongoose = require('mongoose') 
-const exphbs = require('express-handlebars')  
+const mongoose = require('mongoose')
+const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 
 
@@ -48,11 +48,26 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 // Create功能
-app.post('/restaurants', (req, res) => {         
-  return Restaurant.create(req.body)     
-    .then(() => res.redirect('/'))      
+app.post('/restaurants', (req, res) => {
+  return Restaurant.create(req.body)
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
+// Read功能
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .lean()
+    .then(restaurant => res.render('detail', { restaurant }))
+    .catch(error => console.log(error))
+})
+
+// Update功能
+
+// Delete功能
+
+// 搜尋功能(Query String)
 
 // 監聽器
 app.listen(port, () => {

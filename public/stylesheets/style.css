@@ -95,3 +95,11 @@ header {
     height: auto;
   }
 }
+
+.btn-primary {
+  margin:20px 0 0 530px;
+}
+
+.btn-outline-dark {
+  margin: 3px 0 0 635px;
+}

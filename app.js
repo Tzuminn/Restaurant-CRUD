@@ -3,8 +3,7 @@ const express = require('express')
 const mongoose = require('mongoose') 
 const exphbs = require('express-handlebars')  
 const Restaurant = require('./models/restaurant')
-const { response } = require('express')
-const restaurant = require('./models/restaurant')
+
 
 const app = express()
 const port = 3000
@@ -28,12 +27,30 @@ db.once('open', () => {
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
+app.use(express.urlencoded({ extended: true }))
+
+// 設定靜態檔案的位置
+app.use(express.static('public'))
+
 // 設定首頁路由
 app.get('/', (req, res) => {
   // 拿餐廳的資料
   Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
+})
+
+// 讓view引擎去拿new樣板
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+// Create功能
+app.post('/restaurants', (req, res) => {         
+  return Restaurant.create(req.body)     
+    .then(() => res.redirect('/'))      
     .catch(error => console.log(error))
 })
 

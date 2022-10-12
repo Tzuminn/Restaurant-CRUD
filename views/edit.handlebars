@@ -1,0 +1,112 @@
+<div class="container py-5">
+
+  <div class="row">
+    <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">修改店家資料 <i class="fa-sharp fa-solid fa-house"></i></h4>
+          <hr>
+          <form action="/restaurants/{{ restaurant._id }}/edit" method="POST">
+            <div class="row mb-3 g-2">
+              <label for="name" class="col-md-4 col-form-label">
+                Name
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="name" class="form-control" id="name" placeholder="請輸入餐廳完整名稱" required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="category" class="col-md-4 col-form-label">
+                Category
+              </label>
+              <div class="col-md-8">
+                <input list="categorys" name="category" class="form-control" id="category" placeholder="請輸入餐廳類型"
+                  required>
+                <datalist id="categorys">
+                  <option>中東料理</option>
+                  <option>日本料理</option>
+                  <option>義式餐廳</option>
+                  <option>美式</option>
+                  <option>酒吧</option>
+                  <option>咖啡</option>
+                </datalist>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="image" class="col-md-4 col-form-label">
+                Image
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="image" class="form-control" id="image" placeholder="請輸入餐廳圖片網址" required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="location" class="col-md-4 col-form-label">
+                Location
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="location" class="form-control" id="location" placeholder="請輸入餐廳地址" required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="phone" class="col-md-4 col-form-label">
+                Phone
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="phone" class="form-control" id="phone" placeholder="請輸入餐廳電話" required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="google_map" class="col-md-4 col-form-label">
+                Google Map
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="google_map" class="form-control" id="google_map"
+                  placeholder="請輸入餐廳Google Map的連結" required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="rating" class="col-md-4 col-form-label">
+                Rating
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="rating" class="form-control" id="rating" placeholder="請輸入餐廳評分" required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <div class="row mb-3 g-2">
+              <label for="description" class="col-md-4 col-form-label">
+                Description
+              </label>
+              <div class="col-md-8">
+                <input type="text" name="description" class="form-control" id="description" placeholder="請輸入餐廳簡介"
+                  required>
+                <small class="text-muted form-text"></small>
+              </div>
+            </div>
+
+            <button class="btn btn-outline-dark" type="submit">儲存修改</button>
+            <a href="/">
+              <button type="button" class="btn btn-outline-secondary">
+                返回首頁
+              </button>
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

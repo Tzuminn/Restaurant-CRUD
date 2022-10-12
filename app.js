@@ -103,7 +103,10 @@ app.get('/search', (req, res) => {
         restaurant =>
           restaurant.name.toLowerCase().includes(keyword) ||
           restaurant.category.includes(keyword)
-        )
+      )
+      if (filterRestaurants.length === 0) {
+        keyword = '找不到此餐廳，請重新輸入關鍵字!'
+      }
       res.render("index", { restaurants: filterRestaurants, keyword })
     })
     .catch(error => console.log(error))

@@ -90,7 +90,24 @@ app.post('/restaurants/:id/delete', (req, res) => {
 })
 
 // 搜尋功能(Query String)
+app.get('/search', (req, res) => {
+  let keyword = req.query.keyword.trim().toLowerCase()
+  if (!keyword) {
+    return res.redirect('/')
+  }
 
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      const filterRestaurants = restaurants.filter(
+        restaurant =>
+          restaurant.name.toLowerCase().includes(keyword) ||
+          restaurant.category.includes(keyword)
+        )
+      res.render("index", { restaurants: filterRestaurants, keyword })
+    })
+    .catch(error => console.log(error))
+})
 // 監聽器
 app.listen(port, () => {
   console.log(`server is running on http://localhost:${port}`)

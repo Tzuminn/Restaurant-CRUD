@@ -100,6 +100,14 @@ header {
   margin:20px 0 0 530px;
 }
 
-.btn-outline-dark {
-  margin: 3px 0 0 635px;
+.edit-btn-location {
+  margin: 3px 0 0 540px;
+}
+
+.btn-dark {
+  margin: 0 0 0 840px;
+}
+
+.btn-location {
+  margin: 0 0 0 900px;
 }

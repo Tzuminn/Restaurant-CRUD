@@ -44,9 +44,9 @@
                 Image <span class="require">*</span>
               </label>
               <div class="col-md-8">
-                <input type="text" name="image" class="form-control" id="image" value="{{restaurant.image}}" required>
+                <input type="text" name="image" class="form-control" id="image" value="{{restaurant.image}}" pattern="https?://.*" required>
                 <div class="valid-feedback">OK</div>
-                <div class="invalid-feedback">必填</div>
+                <div class="invalid-feedback">請填入餐廳圖片連結</div>
               </div>
             </div>
 
@@ -75,11 +75,13 @@
 
             <div class="row mb-3 g-2">
               <label for="google_map" class="col-md-4 col-form-label">
-                Google Map
+                Google Map <span class="require">*</span>
               </label>
               <div class="col-md-8">
                 <input type="text" name="google_map" class="form-control" id="google_map"
-                  value="{{restaurant.google_map}}">
+                  value="{{restaurant.google_map}}" pattern="https?://www.google.com/maps/place.*" required>
+                  <div class="valid-feedback">OK</div>
+                  <div class="invalid-feedback">請填入Google Map網址</div>
               </div>
             </div>
 
@@ -97,11 +99,12 @@
 
             <div class="row mb-3 g-2">
               <label for="description" class="col-md-4 col-form-label">
-                Description
+                Description <span class="require">*</span>
               </label>
               <div class="col-md-8 form-group">
-                <textarea type="text" name="description" class="form-control" id="description" rows="6">{{restaurant.description}}
-                </textarea>
+                <textarea type="text" name="description" class="form-control" id="description" rows="6" placeholder="請輸入餐廳簡介" required>{{restaurant.description}}</textarea>
+                <div class="valid-feedback">OK</div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
             <div class="edit-btn-location">

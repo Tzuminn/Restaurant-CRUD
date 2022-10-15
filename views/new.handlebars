@@ -13,7 +13,7 @@
               </label>
               <div class="col-md-8">
                 <input type="text" name="name" class="form-control" id="name" placeholder="請輸入餐廳完整名稱" required>
-                <div class="valid-feedback"></div>
+                <div class="valid-feedback">OK</div>
                 <div class="invalid-feedback">必填</div>
               </div>
             </div>
@@ -33,7 +33,7 @@
                   <option>酒吧</option>
                   <option>咖啡</option>
                 </datalist>
-                <div class="valid-feedback"></div>
+                <div class="valid-feedback">OK</div>
                 <div class="invalid-feedback">必填</div>
               </div>
             </div>
@@ -43,9 +43,9 @@
                 Image <span class="require">*</span>
               </label>
               <div class="col-md-8">
-                <input type="text" name="image" class="form-control" id="image" placeholder="請輸入餐廳圖片網址" required>
-                <div class="valid-feedback"></div>
-                <div class="invalid-feedback">必填</div>
+                <input type="text" name="image" class="form-control" id="image" placeholder="請輸入餐廳圖片網址" pattern="https?://.*" required>
+                <div class="valid-feedback">OK</div>
+                <div class="invalid-feedback">請填入餐廳圖片連結</div>
               </div>
             </div>
 
@@ -55,7 +55,7 @@
               </label>
               <div class="col-md-8">
                 <input type="text" name="location" class="form-control" id="location" placeholder="請輸入餐廳地址" required>
-                <div class="valid-feedback"></div>
+                <div class="valid-feedback">OK</div>
                 <div class="invalid-feedback">必填</div>
               </div>
             </div>
@@ -66,19 +66,20 @@
               </label>
               <div class="col-md-8">
                 <input type="text" name="phone" class="form-control" id="phone" placeholder="請輸入餐廳電話" required>
-                <div class="valid-feedback"></div>
+                <div class="valid-feedback">OK</div>
                 <div class="invalid-feedback">必填</div>
               </div>
             </div>
 
             <div class="row mb-3 g-2">
               <label for="google_map" class="col-md-4 col-form-label">
-                Google Map
+                Google Map <span class="require">*</span>
               </label>
               <div class="col-md-8">
                 <input type="text" name="google_map" class="form-control" id="google_map"
-                  placeholder="請輸入餐廳Google Map的連結">
-                <small class="text-muted form-text"></small>
+                  placeholder="請輸入餐廳Google Map的連結" pattern="https?://www.google.com/maps/place.*" required>
+                <div class="valid-feedback">OK</div>
+                <div class="invalid-feedback">請填入Google Map網址</div>
               </div>
             </div>
 
@@ -88,17 +89,19 @@
               </label>
               <div class="col-md-8">
                 <input type="number" name="rating" class="form-control" id="rating" min="0" max="5" step=".1" placeholder="請輸入餐廳評分 0~5分" required>
-                <div class="valid-feedback"></div>
+                <div class="valid-feedback">OK</div>
                 <div class="invalid-feedback">此欄位必填，請輸入0~5分</div>
               </div>
             </div>
 
             <div class="row mb-3 g-2">
               <label for="description" class="col-md-4 col-form-label">
-                Description
+                Description <span class="require">*</span>
               </label>
               <div class="col-md-8 form-group">
-                <textarea type="text" name="description" class="form-control" id="description" rows="6" placeholder="請輸入餐廳簡介"></textarea>
+                <textarea type="text" name="description" class="form-control" id="description" rows="6" placeholder="請輸入餐廳簡介" required></textarea>
+                <div class="valid-feedback">OK</div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
             <div class="new-btn-location">

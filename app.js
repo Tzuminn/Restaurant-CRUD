@@ -6,6 +6,7 @@ const methodOverride =  require('method-override')
 
 const Restaurant = require('./models/restaurant')
 
+const routes = require('./routes')
 
 const app = express()
 const port = 3000
@@ -38,85 +39,9 @@ app.use(express.static('public'))
 // 用 app.use 規定每一筆請求都需要透過 method-override 進行前置處理
 app.use(methodOverride('_method'))
 
-// 瀏覽所有餐廳(首頁)
-app.get('/', (req, res) => {
-  // 拿餐廳的資料
-  Restaurant.find()
-    .lean()
-    .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => console.log(error))
-})
+// 將 request 導入路由器
+app.use(routes)
 
-// 新增餐廳的表單
-app.get('/restaurants/new', (req, res) => {
-  return res.render('new')
-})
-
-// 新增一間餐廳
-app.post('/restaurants', (req, res) => {
-  return Restaurant.create(req.body)
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
-// 瀏覽餐廳詳細資訊
-app.get('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
-    .lean()
-    .then(restaurant => res.render('detail', { restaurant }))
-    .catch(error => console.log(error))
-})
-
-// 修改餐廳的表單
-app.get('/restaurants/:id/edit', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
-    .lean()
-    .then(restaurant => res.render('edit', { restaurant }))
-    .catch(error => console.log(error))
-})
-
-// 修改餐廳資訊
-app.put('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findByIdAndUpdate(id, req.body)
-    .lean()
-    .then(() => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log(error))
-})
-
-// 刪除一間餐廳
-app.delete('/restaurants/:id', (req, res) => {
-  const id = req.params.id
-  return Restaurant.findById(id)
-    .then(restaurant => restaurant.remove())
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
-// 搜尋功能(Query String)
-app.get('/search', (req, res) => {
-  let keyword = req.query.keyword.trim().toLowerCase()
-  if (!keyword) {
-    return res.redirect('/')
-  }
-
-  Restaurant.find()
-    .lean()
-    .then((restaurants) => {
-      const filterRestaurants = restaurants.filter(
-        restaurant =>
-          restaurant.name.toLowerCase().includes(keyword) ||
-          restaurant.category.includes(keyword)
-      )
-      if (filterRestaurants.length === 0) {
-        keyword = '找不到此餐廳，請重新輸入關鍵字!'
-      }
-      res.render("index", { restaurants: filterRestaurants, keyword })
-    })
-    .catch(error => console.log(error))
-})
 // 監聽器
 app.listen(port, () => {
   console.log(`server is running on http://localhost:${port}`)

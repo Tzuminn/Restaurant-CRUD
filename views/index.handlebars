@@ -2,7 +2,7 @@
 <div class="container search-bar">
   <div class="search-bar-outer">
     <div class="search-bar-inner">
-      <form action="/search" method="GET">
+      <form action="/search" method="GET" id="form">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
           <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..."
@@ -10,11 +10,17 @@
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
+          <div class="form-group">
+              <select name="sort" id="sort" onchange="submit()">
+                <option value="0" {{#if sortValue.sortZero}}selected{{/if}}>排序</option>
+                <option value="1" {{#if sortValue.sortOne}}selected{{/if}}>A -> Z</option>
+                <option value="2" {{#if sortValue.sortTwo}}selected{{/if}}>Z -> A</option>
+                <option value="3" {{#if sortValue.sortThree}}selected{{/if}}>類別</option>
+                <option value="4" {{#if sortValue.sortFour}}selected{{/if}}>地區</option>
+              </select>
+          </div>
         </div>
       </form>
-      <div class="text-end">
-        <a href="./restaurants/new"><button class="btn btn-primary">新增餐廳</button></a>
-      </div>
     </div>
   </div>
 </div>
@@ -22,8 +28,8 @@
 <!-- restaurant list -->
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-10 col-12 mx-auto">
-      <div class="card-columns">
+    <div class="cul-md-10 cul-12 mx-auto">
+      <div class="card-columns mb-5">
 
         <!-- 使用each迴圈來產生餐廳卡片 -->
         {{#each restaurants}}

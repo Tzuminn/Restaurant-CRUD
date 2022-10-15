@@ -43,6 +43,7 @@ header {
 .btn-major {
   background-color: #9b4b4b;
   color: white;
+  height: 37px;
 }
 
 .form-control:focus {
@@ -96,10 +97,6 @@ header {
   }
 }
 
-.btn-primary {
-  margin:20px 0 0 530px;
-}
-
 .edit-btn-location {
   margin: 3px 0 0 500px;
 }
@@ -120,4 +117,34 @@ form.was-validated input:valid {
 .require {
   color: red;
   font-weight: 700;
+}
+
+#sort {
+  margin-left: 10px;
+  height: 37px;
+  width: 100px;
+  text-align: center;
+  font-size: 20px;
+}
+
+@media screen and (max-width: 992px) {
+
+  .card img {
+    height: 115px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .restaurant-show-title {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+
+  .card img {
+    height: auto;
+  }
+
 }

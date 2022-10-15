@@ -5,11 +5,14 @@ const router = express.Router()
 // 引用 Restaurant model
 const Restaurant = require('../../models/restaurant')
 
+// 引用 sort
+const sortData = require('../../utility/sortData')
+
 // 瀏覽所有餐廳(首頁)
 router.get('/', (req, res) => {
-  // 拿餐廳的資料
   Restaurant.find()
     .lean()
+    .sort({ _id: 'desc' })
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
 })
@@ -17,12 +20,18 @@ router.get('/', (req, res) => {
 // 搜尋功能(Query String)
 router.get('/search', (req, res) => {
   let keyword = req.query.keyword.trim().toLowerCase()
-  if (!keyword) {
-    return res.redirect('/')
+  const sortType = req.query.sort
+  const sortValue = {
+    sortZero: sortType === '0',
+    sortOne: sortType === '1',
+    sortTwo: sortType === '2',
+    sortThree: sortType === '3',
+    sortFour: sortType === '4',
   }
 
   Restaurant.find()
     .lean()
+    .sort(sortData(sortType))
     .then((restaurants) => {
       const filterRestaurants = restaurants.filter(
         restaurant =>
@@ -32,7 +41,7 @@ router.get('/search', (req, res) => {
       if (filterRestaurants.length === 0) {
         keyword = '找不到此餐廳，請重新輸入關鍵字!'
       }
-      res.render("index", { restaurants: filterRestaurants, keyword })
+      res.render("index", { restaurants: filterRestaurants, keyword, sortValue })
     })
     .catch(error => console.log(error))
 })

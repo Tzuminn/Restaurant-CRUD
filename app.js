@@ -2,6 +2,8 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
+const methodOverride =  require('method-override')
+
 const Restaurant = require('./models/restaurant')
 
 
@@ -33,7 +35,10 @@ app.use(express.urlencoded({ extended: true }))
 // 設定靜態檔案的位置
 app.use(express.static('public'))
 
-// 設定首頁路由
+// 用 app.use 規定每一筆請求都需要透過 method-override 進行前置處理
+app.use(methodOverride('_method'))
+
+// 瀏覽所有餐廳(首頁)
 app.get('/', (req, res) => {
   // 拿餐廳的資料
   Restaurant.find()
@@ -42,19 +47,19 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// 讓view引擎去拿new樣板
+// 新增餐廳的表單
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
 
-// Create功能
+// 新增一間餐廳
 app.post('/restaurants', (req, res) => {
   return Restaurant.create(req.body)
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
-// Read功能
+// 瀏覽餐廳詳細資訊
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -63,7 +68,7 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// Update功能
+// 修改餐廳的表單
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -72,7 +77,8 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+// 修改餐廳資訊
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findByIdAndUpdate(id, req.body)
     .lean()
@@ -80,8 +86,8 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// Delete功能
-app.post('/restaurants/:id/delete', (req, res) => {
+// 刪除一間餐廳
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())

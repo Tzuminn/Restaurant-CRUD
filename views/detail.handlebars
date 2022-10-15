@@ -1,10 +1,4 @@
 <h1 class="mb-1 restaurant-show-title">{{restaurant.name}}</h1>
-<div class="btn-location">
-  <a href="/restaurants/{{restaurant._id}}/edit"><button class="btn btn-warning text-white">編輯</button></a>
-  <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline">
-    <button type="submit" class="btn btn-danger text-white">刪除餐廳</button>
-  </form>
-</div>
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mx-auto">
@@ -44,5 +38,11 @@
         style="max-width: 600px;">
     </div>
   </div>
+  <div class="btn-location d-flex justify-content-end flex-wrap">
+  <a href="/restaurants/{{restaurant._id}}/edit"><button class="btn btn-warning text-white">編輯</button></a>
+  <form action="/restaurants/{{ restaurant._id }}?_method=DELETE" method="POST" style="display: inline">
+    <button type="submit" class="btn btn-danger text-white">刪除餐廳</button>
+  </form>
   <a href="/"><button class="btn btn-dark">返回首頁</button></a>
+  </div>
 </div>

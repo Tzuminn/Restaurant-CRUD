@@ -107,3 +107,17 @@ header {
 .new-btn-location {
   margin: 3px 0 0 540px;
 }
+
+
+form.was-validated input:invalid {
+  border-bottom: 1px solid red;
+}
+
+form.was-validated input:valid {
+  border-bottom: 1px solid green;
+}
+
+.require {
+  color: red;
+  font-weight: 700;
+}

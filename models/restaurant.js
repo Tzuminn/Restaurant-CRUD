@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 
 // 用 new Schema() 的方式來建構一個新的 Schema
 const restaurantSchema = new Schema({
-  name: {          // 每筆 todo 資料都有一個叫做 name 的屬性
-    type: String,  // 資料型別是字串
-    required: true // 這是個必填欄位
+  name: {          
+    type: String,  
+    required: true 
   },
   category: {
     type: String,

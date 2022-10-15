@@ -4,27 +4,28 @@
     <div class="col-12 col-lg-10 col-xl-8 mx-auto">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">新增店家資訊 <i class="fa-sharp fa-solid fa-house"></i></h4>
+          <h4 class="card-title">新增店家資訊<i class="fa-sharp fa-solid fa-house"></i></h4>
           <hr>
-          <form action="/restaurants" method="POST">
-            <div class="row mb-3 g-2">
+          <form action="/restaurants" method="POST" id="form" novalidate>
+            <div class="form-group row mb-3 g-2">
               <label for="name" class="col-md-4 col-form-label">
-                Name
+                Name <span class="require">*</span>
               </label>
               <div class="col-md-8">
                 <input type="text" name="name" class="form-control" id="name" placeholder="請輸入餐廳完整名稱" required>
-                <small class="text-muted form-text"></small>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
 
             <div class="row mb-3 g-2">
               <label for="category" class="col-md-4 col-form-label">
-                Category
+                Category <span class="require">*</span>
               </label>
               <div class="col-md-8">
-                <input list="categorys" name="category" class="form-control" id="category" placeholder="請輸入餐廳類型"
+                <input list="categories" name="category" class="form-control" id="category" placeholder="請輸入餐廳類型"
                   required>
-                <datalist id="categorys">
+                <datalist id="categories">
                   <option>中東料理</option>
                   <option>日本料理</option>
                   <option>義式餐廳</option>
@@ -32,37 +33,41 @@
                   <option>酒吧</option>
                   <option>咖啡</option>
                 </datalist>
-                <small class="text-muted form-text"></small>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
 
             <div class="row mb-3 g-2">
               <label for="image" class="col-md-4 col-form-label">
-                Image
+                Image <span class="require">*</span>
               </label>
               <div class="col-md-8">
                 <input type="text" name="image" class="form-control" id="image" placeholder="請輸入餐廳圖片網址" required>
-                <small class="text-muted form-text"></small>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
 
             <div class="row mb-3 g-2">
               <label for="location" class="col-md-4 col-form-label">
-                Location
+                Location <span class="require">*</span>
               </label>
               <div class="col-md-8">
                 <input type="text" name="location" class="form-control" id="location" placeholder="請輸入餐廳地址" required>
-                <small class="text-muted form-text"></small>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
 
             <div class="row mb-3 g-2">
               <label for="phone" class="col-md-4 col-form-label">
-                Phone
+                Phone <span class="require">*</span>
               </label>
               <div class="col-md-8">
                 <input type="text" name="phone" class="form-control" id="phone" placeholder="請輸入餐廳電話" required>
-                <small class="text-muted form-text"></small>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">必填</div>
               </div>
             </div>
 
@@ -79,12 +84,12 @@
 
             <div class="row mb-3 g-2">
               <label for="rating" class="col-md-4 col-form-label">
-                Rating
+                Rating <span class="require">*</span>
               </label>
               <div class="col-md-8">
-                <input type="text" name="rating" class="form-control" id="rating" placeholder="請輸入餐廳評分 1~5分" min="1"
-                  max="5" required>
-                <small class="text-muted form-text"></small>
+                <input type="number" name="rating" class="form-control" id="rating" min="0" max="5" step=".1" placeholder="請輸入餐廳評分 0~5分" required>
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">此欄位必填，請輸入0~5分</div>
               </div>
             </div>
 
@@ -92,13 +97,12 @@
               <label for="description" class="col-md-4 col-form-label">
                 Description
               </label>
-              <div class="col-md-8">
-                <input type="text" name="description" class="form-control" id="description" placeholder="請輸入餐廳簡介">
-                <small class="text-muted form-text"></small>
+              <div class="col-md-8 form-group">
+                <textarea type="text" name="description" class="form-control" id="description" rows="6" placeholder="請輸入餐廳簡介"></textarea>
               </div>
             </div>
             <div class="new-btn-location">
-            <button class="btn btn-outline-dark" type="submit">新增店家</button>
+            <button class="btn btn-outline-dark" type="submit" id="submit-button">新增店家</button>
             <a href="/">
               <button type="button" class="btn btn-outline-dark">
                 返回首頁
@@ -111,3 +115,5 @@
   </div>
 </div>
 </div>
+
+<script src='/javascripts/verifydata.js'></script>

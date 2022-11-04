@@ -5,6 +5,11 @@ const exphbs = require('express-handlebars')
 const methodOverride =  require('method-override')
 const flash = require('connect-flash')
 
+// 設定.env 如果是在正式環境中執行，就讀取env檔案
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const routes = require('./routes')
 require('./config/mongoose')
 
@@ -12,7 +17,7 @@ require('./config/mongoose')
 const usePassport = require('./config/passport')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 // 設定為handlebars引擎
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -20,7 +25,7 @@ app.set('view engine', 'handlebars')
 
 // session
 app.use(session({
-  secret: 'ThisIsUserSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))

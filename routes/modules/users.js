@@ -24,6 +24,7 @@ router.get('/register', (req, res) => {
 // 註冊功能
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  
   const errors = []
 
   if (!email || !password || !confirmPassword) {
@@ -32,6 +33,16 @@ router.post('/register', (req, res) => {
   if (password !== confirmPassword) {
     errors.push({ message: '密碼與確認密碼不相符！' })
   }
+  if (errors.length) {
+    return res.render('register', {
+      errors,
+      name,
+      email,
+      password,
+      confirmPassword
+    })
+  }
+
   User.findOne({ email })
     .then(user => {
       if (user) {

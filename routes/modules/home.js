@@ -10,7 +10,8 @@ const sortData = require('../../utility/sortData')
 
 // 瀏覽所有餐廳(首頁)
 router.get('/', (req, res) => {
-  Restaurant.find()
+  const userId = req.user._id
+  Restaurant.find({ userId })
     .lean()
     .sort({ _id: 'desc' })
     .then(restaurants => res.render('index', { restaurants }))

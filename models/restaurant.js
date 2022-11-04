@@ -35,6 +35,13 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     required: true
+  },
+  // 用來關聯restaurant和user資料庫
+  userId: {
+    type: Schema.Types.ObjectId, // 定義userId是一個 ObjectId，它會連向另一個資料物件
+    ref: 'User',                 // 定義對象是 User model
+    index: true,                 // 把 userId 設定成「索引」，加快查找效率。
+    required: true
   }
 })
 

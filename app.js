@@ -2,6 +2,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const methodOverride =  require('method-override')
+const session = require('express-session')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -12,6 +13,13 @@ const port = 3000
 // 設定為handlebars引擎
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
+
+// session
+app.use(session({
+  secret: 'ThisIsUserSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // 用 app.use 規定每一筆請求都需要透過 body-parser 進行前置處理
 app.use(express.urlencoded({ extended: true }))

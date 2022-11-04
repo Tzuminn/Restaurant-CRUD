@@ -3,7 +3,7 @@ const express = require('express')
 const session = require('express-session')
 const exphbs = require('express-handlebars')
 const methodOverride =  require('method-override')
-
+const flash = require('connect-flash')
 
 const routes = require('./routes')
 require('./config/mongoose')
@@ -36,12 +36,15 @@ app.use(methodOverride('_method'))
 
 // 呼叫Passport函式並傳入app
 usePassport(app)
+app.use(flash())
 
 // 設定本地變數
 app.use((req, res, next) => {
   // 讓 isAuthenticated 和 user 可以用於所有樣板
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
   next()
 })
 
